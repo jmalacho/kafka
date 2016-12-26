@@ -1,0 +1,8 @@
+---
+- hosts: localhost
+  tasks:
+  - yum:
+     state: present
+     name: "./{{dist}}/kafka-{{kafka_version}}.{{arch}}.rpm"
+
+
