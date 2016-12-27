@@ -1,2 +1,2 @@
 #!/bin/bash
-docker build --force-rm -t jmalacho/kafka:latest  .
+docker build --no-cache -t jmalacho/kafka:latest  .
