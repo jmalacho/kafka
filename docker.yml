@@ -37,4 +37,9 @@
      when: not stat_pid.stat.exists or not stat_proc.stat.exists
 
    - wait_for:
-      port: 9092 
+      port: 9092
+
+   - wait_for:
+      port: 9092
+      state: drained
+      timeout: 31536000 
