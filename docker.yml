@@ -41,5 +41,5 @@
 
    - wait_for:
       port: 9092
-      state: drained
+      state: absent
       timeout: 31536000 
