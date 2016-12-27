@@ -1,0 +1,18 @@
+---
+  - template:
+     src: zookeeper.service
+     dest: /etc/systemd/system/zookeeper.service
+     
+  - service:
+     name: zookeeper
+     enabled: yes
+     state: started 
+  
+  - template:
+     src: kafka.service
+     dest: /etc/systemd/system/kafka.service
+  
+  - service:
+     name: kafka
+     enabled: yes
+     state: started 
