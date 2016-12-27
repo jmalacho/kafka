@@ -6,4 +6,4 @@ RUN ansible-playbook -v /ansible/install.yml
 
 EXPOSE 2181 9092
 
-CMD ansible-playbook -v /ansible/start.yml
+CMD /ansible/docker-cmd

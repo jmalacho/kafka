@@ -31,7 +31,7 @@
      when: stat_pid.stat.exists
 
    - command: >
-       daemonize -ae /var/log/kafka.error -o /var/log/zookeeper.out 
+       daemonize -ae /var/log/kafka.error -o /var/log/kafka.out 
        -p /var/run/kafka -l /var/lock/kafka -v 
        /opt/kafka/bin/kafka-server-start.sh /opt/kafka/config/server.properties
      when: not stat_pid.stat.exists or not stat_proc.stat.exists

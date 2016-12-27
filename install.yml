@@ -10,3 +10,6 @@
     - "./{{dist}}/kafka-{{kafka_version}}.{{arch}}.rpm"
 
   - command: yum clean all
+
+  - command: cp ./docker-cmd /
+
