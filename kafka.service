@@ -1,0 +1,12 @@
+[Unit]
+Description=Kafka
+After=network.target
+Wants=zookeeper.service
+
+[Service]
+Type=simple
+User=root
+ExecStart=/opt/kafka/bin/kafka-server-start.sh /opt/kafka/config/server.properties
+Restart=on-abort
+
+[Install]

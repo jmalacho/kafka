@@ -3,6 +3,25 @@
   tasks:
   - yum:
      state: present
-     name: "./{{dist}}/kafka-{{kafka_version}}.{{arch}}.rpm"
+     name: "{{item}}"
+    with_items:
+    - java
+    - "./{{dist}}/kafka-{{kafka_version}}.{{arch}}.rpm"
 
-
+  - template:
+     src: zookeeper.service
+     dest: /etc/systemd/system/zookeeper.service
+     
+  - service:
+     name: zookeeper
+     enabled: yes
+     state: started 
+  
+  - template:
+     src: kafka.service
+     dest: /etc/systemd/system/kafka.service
+  
+  - service:
+     name: kafka
+     enabled: yes
+     state: started 
