@@ -1,3 +1,4 @@
 kafka_version: 2.11-0.10.1.0
+kafka_basepath: /opt/kafka
 arch: x86_64
 dist: el7

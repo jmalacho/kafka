@@ -1,0 +1,2 @@
+#!/bin/bash
+docker run -d -p 2181:2181 -p 9092:9092 jmalacho/kafka

@@ -11,5 +11,10 @@
 
   - command: yum clean all
 
+  - template:
+     src: kafka_config_service.properties
+     dest: "{{ kafka_basepath}}/config/server.properties"
+
+
   - command: cp ./docker-cmd /
 
