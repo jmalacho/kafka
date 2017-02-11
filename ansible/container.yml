@@ -7,11 +7,7 @@ services:
     - "9092:9092"
 
     command: ['/docker-cmd']
-  #   command: ['/usr/bin/dumb-init', '/usr/sbin/apache2ctl', '-D', 'FOREGROUND']
-  #   dev_overrides:
-  #     environment:
-  #       - "DEBUG=1"
-  #
+
 registries:
   docker:
     url: https://hub.docker.com/

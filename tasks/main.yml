@@ -15,7 +15,7 @@
   - copy:
      src: docker-cmd
      dest: /
-
+     mode: 0755
 
   - template:
      src: kafka_config_service.properties
