@@ -6,8 +6,8 @@ services:
     - "2181:2181"
     - "9092:9092"
 
-    command: ['/docker-cmd']
-
+#    command: ['/docker-cmd']
+    command: ['sleep', '10']
 registries:
   docker:
     url: https://hub.docker.com/

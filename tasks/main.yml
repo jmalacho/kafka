@@ -4,13 +4,15 @@
      src: kafka-{{kafka_version}}.{{arch}}.rpm
      dest: / 
 
+  - yum: name=epel-release
+
   - yum:
      state: present
      name: "{{item}}"
     with_items:
     - java
     - /kafka-{{kafka_version}}.{{arch}}.rpm
-#    - daemonize
+    - daemonize
 
   - copy:
      src: docker-cmd
