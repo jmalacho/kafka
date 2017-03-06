@@ -5,3 +5,5 @@ kafka_basepath: /opt/kafka
 arch: x86_64
 dist: el7
 
+test: false
+main: true

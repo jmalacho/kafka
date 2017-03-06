@@ -1,0 +1,28 @@
+---
+- yum: name=epel-release
+
+- copy:
+   src: "{{ item }}"
+   dest: /
+  with_items:
+  - librdkafka1-0.9.5-1.el7.centos.x86_64.rpm
+  - librdkafka-devel-0.9.5-1.el7.centos.x86_64.rpm
+
+- yum:
+   state: present
+   name: "{{ item }}"
+  with_items:
+  - lz4 
+  - python-devel
+  - /librdkafka1-0.9.5-1.el7.centos.x86_64.rpm
+  - /librdkafka-devel-0.9.5-1.el7.centos.x86_64.rpm
+
+# CLEANUP
+- command: yum clean all
+
+- file:
+    state: absent
+    path: "{{ item }}"
+  with_items:
+  - /librdkafka1-0.9.5-1.el7.centos.x86_64.rpm
+  - /librdkafka-devel-0.9.5-1.el7.centos.x86_64.rpm

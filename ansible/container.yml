@@ -1,12 +1,14 @@
 version: "2"
 services:
-  kafka:
+  main:
     image: centos:7
-    ports:
-    - "2181:2181"
-    - "9092:9092"
-
+#    ports:
+#    - "2181:2181"
+#    - "9092:9092"
 #    command: ['/docker-cmd']
+    command: ['sleep', '10']
+  test:
+    image: centos:7
     command: ['sleep', '10']
 registries:
   docker:

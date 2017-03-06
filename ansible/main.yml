@@ -5,7 +5,12 @@
 # For many examples of roles, check out Ansible Galaxy: https://galaxy.ansible.com/
 #
 ---
-- hosts: all
+- hosts: main
   gather_facts: false
   roles:
-  - jmalacho.kafka
+  - { role: jmalacho.kafka, main: true, test: false }
+
+- hosts: test
+  gather_facts: false
+  roles:
+  - { role: jmalacho.kafka, main: false, test: true }

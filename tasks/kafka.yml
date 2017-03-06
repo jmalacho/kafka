@@ -1,0 +1,31 @@
+---
+# tasks file for kafka
+  - copy:
+     src: kafka-{{kafka_version}}.{{arch}}.rpm
+     dest: / 
+
+  - yum: name=epel-release
+
+  - yum:
+     state: present
+     name: "{{ item }}"
+    with_items:
+    - java
+    - /kafka-{{kafka_version}}.{{arch}}.rpm
+    - daemonize
+
+  - copy:
+     src: docker-cmd
+     dest: /
+     mode: 0755
+
+  - template:
+     src: kafka_config_service.properties
+     dest: "{{ kafka_basepath}}/config/server.properties"
+
+# CLEANUP
+  - command: yum clean all
+
+  - file:
+      state: absent
+      path: /kafka-{{kafka_version}}.{{arch}}.rpm
