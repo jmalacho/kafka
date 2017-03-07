@@ -1,14 +1,17 @@
 ---
-- yum: name=epel-release
+- name: Install epel repo (needed for some dependencies like python-pip)
+  yum: name=epel-release
 
-- copy:
+- name: Copy in local rpms
+  copy:
    src: "{{ item }}"
    dest: /
   with_items:
   - librdkafka1-0.9.5-1.el7.centos.x86_64.rpm
   - librdkafka-devel-0.9.5-1.el7.centos.x86_64.rpm
 
-- yum:
+- name: Install Runtime test dependencies
+  yum:
    state: present
    name: "{{ item }}"
   with_items:
@@ -16,11 +19,33 @@
   - python-devel
   - /librdkafka1-0.9.5-1.el7.centos.x86_64.rpm
   - /librdkafka-devel-0.9.5-1.el7.centos.x86_64.rpm
+  - python-pip
+  - gcc
 
-# CLEANUP
-- command: yum clean all
+- name: Intall Python test dependencies
+  pip: name={{ item }}
+  with_items:
+  - confluent-kafka
+  - pytest
 
-- file:
+- name: Ensure testing directory exists
+  file: state=directory path={{ kafka_testdir }} mode=0755
+
+- name: Copy in pyTest files
+  copy:
+    src: "{{ item }}"
+    dest: "{{ kafka_testdir }}"
+  with_items:
+  - test_kafka.py
+
+- name: Create mount point for results export
+  file: state=directory mode=777 path={{ kafka_resultsdir }}
+
+- name: "Clean up yum cache"
+  command: yum clean all
+
+- name: "Clean up local rpms"
+  file:
     state: absent
     path: "{{ item }}"
   with_items:

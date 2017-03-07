@@ -1,0 +1,7 @@
+#!/bin/bash -ex
+currentpath=$(dirname $0)
+cd $currentpath/../
+ansible-container build  --roles-path `pwd`/../ --from-scratch
+
+docker build -t jmalacho/kafka .
+docker build -f Dockerfile-test -t jmalacho/kafka-test .

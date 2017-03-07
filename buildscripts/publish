@@ -1,0 +1,4 @@
+#!/bin/bash -ex
+docker push jmalacho/kafka
+docker push jmalacho/kafka-test
+
