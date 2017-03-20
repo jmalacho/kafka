@@ -1,0 +1,2 @@
+FROM kafka-test
+MAINTAINER Jon Malachowski "jmalacho@gmail.com"

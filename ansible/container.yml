@@ -1,15 +1,26 @@
 version: "2"
 services:
-  main:
+  kafka:
     image: centos:7
-#    ports:
-#    - "2181:2181"
-#    - "9092:9092"
-#    command: ['/docker-cmd']
     command: ['sleep', '10']
+    dev_overrides:
+      ports:
+      - "2181:2181"
+      - "9092:9092"
+      expose:
+      - 2181
+      - 9092
+      command: ['/docker-cmd']
   test:
     image: centos:7
     command: ['sleep', '10']
+    depends_on:
+    - kafka
+    dev_overrides:
+      command: ['/bin/pytest', '--junitxml=/results/results.xml', '-xv', '/test']
+      volumes: 
+      - $WORKSPACE/results:/results
+#      command: ['sleep', '9999']
 registries:
   docker:
     url: https://hub.docker.com/

@@ -7,3 +7,6 @@ dist: el7
 
 test: false
 main: true
+
+kafka_testdir: /test
+kafka_resultsdir: /results

@@ -1,0 +1,26 @@
+#!/bin/bash -ex
+# Depends on inotify tools, and xmlstarlet
+
+# Useful Manual investigation: 
+#  docker run -d -p 2181:2181 -p 9092:9092 --name kafka -h kafka jmalacho/kafka
+
+export WORKSPACE="`pwd`"
+mkdir -p $WORKSPACE/results
+rm -f $WORKSPACE/results/results.xml
+ansible-container run --roles-path `pwd`/../ &
+f=$WORKSPACE/results/results.xml
+while [ ! -f "$f" ]
+do
+    inotifywait -qqt 2 -e create -e moved_to "$(dirname $f)" || true
+done
+docker stop ansible_kafka_1
+
+errors=$(xmlstarlet sel -t -m testsuite -v @errors $f)
+failures=$(xmlstarlet sel -t -m testsuite -v @failures $f)
+echo "Errors $errors, Failures: $failures"
+
+if [ $errors -ne 0 ] || [ $failures -ne 0 ]; then
+  exit 1;
+else
+  echo "Successfull"
+fi

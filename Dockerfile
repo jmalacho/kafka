@@ -1,4 +1,4 @@
-FROM jmalacho.kafka-kafka
+FROM kafka-kafka
 MAINTAINER Jon Malachowski "jmalacho@gmail.com"
 
 EXPOSE 2181 9092
